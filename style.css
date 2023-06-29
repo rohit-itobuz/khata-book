@@ -6,44 +6,48 @@
   /* font-family: "Poppins", sans-serif; */
   font-family: Arial, sans-serif;
 }
+
 body {
   width: 100%;
   height: 100vh;
   background-image: url(/background.jpeg);
 }
-  
-  h2 {
-    margin-top: 30px;
-  }
-  
-  form label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  form input[type="text"],
-  form input[type="number"] {
-    width: 200px;
-  }
-  
-  form button {
-    margin-top: 10px;
-  }
-  
-  #borrowList {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #borrowList li {
-    margin-top: 5px;
-  }
-  
-  #borrowList li span {
-    font-weight: bold;
-  }
-  
-  #borrowList li button {
-    margin-left: 10px;
-  }
-  
+
+.book {
+  color: rgb(198, 52, 52);
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  width: 200px;
+}
+
+form button {
+  margin-top: 10px;
+}
+
+#borrowList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#borrowList li {
+  margin-top: 5px;
+}
+
+#borrowList li span {
+  font-weight: bold;
+}
+
+#borrowList li button {
+  margin-left: 10px;
+}
