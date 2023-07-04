@@ -29,7 +29,7 @@
       <label class="fs-5 mt-3">Name:</label>
       <input class="p-2" type="text" id="name" placeholder="Nick Name.." />
 
-      <label class="fs-5">Amount:</label>
+      <label class="fs-5 mt-3">Amount:</label>
       <input class="p-2" type="number" id="amount" placeholder="Money.." />
 
       <button class="p-2 bg-warning" type="submit">Save</button>
@@ -38,11 +38,8 @@
     <h2 class="text-center text-primary fw-bold mt-3">
       Borrowing List <i class="fa-solid fa-book-open-reader fa-bounce"></i>
     </h2>
-    <div class="d-flex flex-column flex-lg-row gap-0">
-      <div class="fs-5 d-flex flex-column gap-3 mx-5 fw-light px-2 text-center justify-content-center" id="borrowList">
-      </div>
-      <div class="d-flex gap-2 align-self-center" id="addUpdateAmount"></div>
-    </div>
+
+    <div class="d-flex flex-column fs-5 gap-3 mx-5 px-2 mt-3" id="borrowList"></div>
   </div>
 
   <script src="main.js"></script>

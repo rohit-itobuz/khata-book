@@ -1,7 +1,6 @@
 // Accessing HTML elements
 const borrowForm = document.getElementById("borrowForm");
 const borrowList = document.getElementById("borrowList");
-const addUpdateAmount = document.getElementById("addUpdateAmount");
 
 // Array to store borrowing records
 let borrowRecords = [];
@@ -37,10 +36,8 @@ function addBorrowing(event) {
 // Function to update borrowing list display
 function updateBorrowingList() {
   borrowList.innerHTML = "";
-  addUpdateAmount.innerHTML = "";
 
   borrowRecords.forEach((record, index) => {
-    // create container for storing borrowed records
     const listItem = document.createElement("li");
     const nameSpan = document.createElement("span");
     const amountSpan = document.createElement("span");
@@ -49,6 +46,9 @@ function updateBorrowingList() {
     nameSpan.innerText = "Name:-" + " " + record.name + " " + "🔗🔗" + " ";
     amountSpan.innerText = "Amount:-" + " " + "₹" + record.amount;
     updateButton.innerText = "Update";
+    updateButton.style.paddingLeft = "2px";
+    updateButton.style.paddingRight = "2px";
+    updateButton.style.marginLeft = "1rem";
     updateButton.setAttribute("data-index", index);
     updateButton.addEventListener("click", updateBorrowing);
 
@@ -64,23 +64,35 @@ function updateBorrowing(event) {
   const index = event.target.getAttribute("data-index");
 
   if (index !== null) {
-    let updateInput = document.createElement("INPUT");
-    addUpdateAmount.appendChild(updateInput);
-
+    const listItem = event.target.parentNode;
+    const updateInput = document.createElement("input");
     const addButton = document.createElement("button");
-    addButton.innerText = "add";
+
+    updateInput.type = "number";
+    updateInput.setAttribute("data-index", index);
+    updateInput.placeholder = "Additional amount";
+    updateInput.style.marginLeft = "2rem";
+    updateInput.style.paddingLeft = "2px";
+
+    addButton.innerText = "Add";
+    addButton.style.paddingLeft = "2px";
+    addButton.style.paddingRight = "2px";
     addButton.addEventListener("click", add);
-    addUpdateAmount.appendChild(addButton);
 
     function add() {
       const newAmount = updateInput.value;
-      if (!isNaN(newAmount)) {
+
+      if (!isNaN(newAmount) && newAmount !== "") {
         borrowRecords[index].amount =
           Number(borrowRecords[index].amount) + Number(newAmount);
+        updateInput.disabled = true; // Disable the input box after adding the amount
+        addButton.disabled = true; // Disable the "Add" button after adding the amount
         updateBorrowingList();
       } else {
-        alert("Enter Valid Amount");
+        alert("Enter a valid amount");
       }
     }
+    listItem.insertBefore(updateInput, event.target.nextSibling);
+    listItem.insertBefore(addButton, updateInput.nextSibling);
   }
 }

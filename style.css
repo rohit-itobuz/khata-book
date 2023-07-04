@@ -26,26 +26,8 @@ form label {
   margin-top: 10px;
 }
 
-form input[type="text"],
-form input[type="number"] {
-  width: 200px;
-}
-
-form button {
-  margin-top: 10px;
-}
-
 #borrowList {
   list-style-type: none;
-  padding: 0;
-}
-
-#borrowList li {
-  margin-top: 5px;
-}
-
-#borrowList li span {
-  font-weight: bold;
 }
 
 #borrowList li button {
