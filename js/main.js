@@ -20,10 +20,9 @@ function addBorrowing(event) {
   nameInput.value = "";
   amountInput.value = "";
 
-  console.log(amount[0]);
   // Add record to the array
-  if (!name || !amount || amount[0] === "0") {
-    alert("please enter proper name and amount");
+  if (!name || !amount || amount <= 0) {
+    alert("please enter proper name and proper amount");
   } else {
     borrowRecords.push({ name, amount });
 
