@@ -3,10 +3,8 @@ const borrowForm = document.getElementById("borrowForm");
 const borrowList = document.getElementById("borrowList");
 
 // Array to store borrowing records
-let borrowRecords = [];
+const borrowRecords = [];
 
-// Event listener for form submission
-borrowForm.addEventListener("submit", addBorrowing);
 
 // Function to add a borrowing record
 function addBorrowing(event) {
@@ -22,13 +20,14 @@ function addBorrowing(event) {
   nameInput.value = "";
   amountInput.value = "";
 
+  console.log(amount[0]);
   // Add record to the array
-  if (name === "" || amount === "") {
-    alert("please enter in logical way");
+  if (!name || !amount || amount[0] === "0") {
+    alert("please enter proper name and amount");
   } else {
     borrowRecords.push({ name, amount });
 
-    // Update borrowing list display status or show function
+  // Update borrowing list display status or show function
     updateBorrowingList();
   }
 }
@@ -96,3 +95,6 @@ function updateBorrowing(event) {
     listItem.insertBefore(addButton, updateInput.nextSibling);
   }
 }
+
+// Event listener for form submission
+borrowForm.addEventListener("submit", addBorrowing);
