@@ -135,6 +135,14 @@ function deleteAll() {
   localStorage.clear();
 }
 
+// Press ENTER to add Data
+borrowForm.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("save-button").click();
+  }
+});
+
 // Event listener for form submission
 borrowForm.addEventListener("submit", addBorrowing);
 
