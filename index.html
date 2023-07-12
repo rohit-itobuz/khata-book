@@ -35,7 +35,13 @@
       Borrowing List <i class="fa-solid fa-book-open-reader fa-bounce"></i>
     </h2>
 
-    <button class="p-2 mx-auto border rounded-3" id="deleteAll" onclick="deleteAll()">🗑️ Clear All 🚮</button>
+    <div class="d-flex justify-content-around">
+      <p class="total-amount pt-2 fs-4 p-2 border rounded-3">
+        Total Amount: ₹<span id="totalAmountValue"></span>
+      </p>
+      <button class="px-2 border rounded-3 fs-5" id="deleteAll" onclick="deleteAll()">🗑️ Clear All 🚮</button>
+    </div>
+    
 
     <div class="d-flex flex-column fs-5 gap-3 mx-5 px-2 mt-3" id="borrowList"></div>
   </div>

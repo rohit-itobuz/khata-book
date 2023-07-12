@@ -43,6 +43,7 @@ function addBorrowing(event) {
 // Function to update borrowing list display
 function updateBorrowingList() {
   borrowList.innerHTML = "";
+  let totalAmount = 0;
 
   borrowRecords.forEach((record, index) => {
     const listItem = document.createElement("li");
@@ -76,7 +77,10 @@ function updateBorrowingList() {
     listItem.appendChild(removeButton);
     listItem.appendChild(updateButton);
     borrowList.appendChild(listItem);
+
+    totalAmount += Number(record.amount);
   });
+  document.getElementById("totalAmountValue").innerHTML = totalAmount;
 }
 
 // Function to update a borrowing record

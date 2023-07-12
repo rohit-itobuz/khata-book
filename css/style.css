@@ -27,6 +27,10 @@ form label {
   margin-top: 10px;
 }
 
+.total-amount {
+  background-color: rgb(226, 228, 231);
+}
+
 #borrowList {
   list-style-type: none;
 }
