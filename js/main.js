@@ -17,10 +17,10 @@ function addBorrowing(event) {
 
   // Check if name already exists
   const existingRecord = borrowRecords.find(
-    (record) => record.customerName === customerName
+    record => record.customerName.toLowerCase() === customerName.toLowerCase()
   );
   if (existingRecord) {
-    alert("Name already exists");
+    alert("Name already exists...");
     return;
   } else if (!customerName || !amount || amount <= 0) {
     alert("Please enter a proper name and a proper amount.");
@@ -52,8 +52,8 @@ function updateBorrowingList() {
     const updateButton = document.createElement("button");
 
     nameSpan.innerText =
-      "Name:-" + " " + record.customerName + " " + "🔗🔗" + " ";
-    amountSpan.innerText = "Amount:-" + " " + "₹" + record.amount;
+      "Name:" + " " + record.customerName + " " + "🔗🔗" + " ";
+    amountSpan.innerText = "Amount:" + " " + "₹" + record.amount;
 
     removeButton.innerText = "Remove";
     removeButton.style.paddingLeft = "2px";
