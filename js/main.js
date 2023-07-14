@@ -17,7 +17,7 @@ function addBorrowing(event) {
 
   // Check if name already exists
   const existingRecord = borrowRecords.find(
-    record => record.customerName.toLowerCase() === customerName.toLowerCase()
+    (record) => record.customerName.toLowerCase() === customerName.toLowerCase()
   );
   if (existingRecord) {
     alert("Name already exists...");
@@ -52,21 +52,19 @@ function updateBorrowingList() {
     const removeButton = document.createElement("button");
     const updateButton = document.createElement("button");
 
-    nameSpan.innerText =
-      "Name:" + " " + record.customerName + " " + "🔗🔗" + " ";
-    amountSpan.innerText = "Amount:" + " " + "₹" + record.amount;
+    nameSpan.innerText = "🧍" + "Name:" + " " + record.customerName + " ";
+    amountSpan.innerText =
+      " " + "💵💰" + " " + "Amount:" + " " + "₹" + record.amount;
 
     removeButton.innerText = "Remove";
-    removeButton.style.paddingLeft = "2px";
-    removeButton.style.paddingRight = "2px";
+    removeButton.style.padding = "2px";
     removeButton.style.marginLeft = "1rem";
     removeButton.style.color = "red";
     removeButton.setAttribute("data-index", index);
     removeButton.addEventListener("click", removeData);
 
     updateButton.innerText = "Update";
-    updateButton.style.paddingLeft = "2px";
-    updateButton.style.paddingRight = "2px";
+    updateButton.style.padding = "2px";
     updateButton.style.marginLeft = "1rem";
     updateButton.style.color = "green";
     updateButton.setAttribute("data-index", index);
@@ -96,11 +94,10 @@ function updateBorrowing(event) {
     updateInput.setAttribute("data-index", index);
     updateInput.placeholder = "Additional amount";
     updateInput.style.marginLeft = "2rem";
-    updateInput.style.paddingLeft = "2px";
+    updateInput.style.padding = "2px";
 
     addButton.innerText = "Add";
-    addButton.style.paddingLeft = "2px";
-    addButton.style.paddingRight = "2px";
+    addButton.style.padding = "2px";
     addButton.addEventListener("click", addAmount);
 
     function addAmount() {
@@ -140,7 +137,7 @@ function deleteAll() {
 }
 
 // Press ENTER to add Data
-borrowForm.addEventListener("keypress", function(event) {
+borrowForm.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
     document.getElementById("save-button").click();
