@@ -102,11 +102,16 @@ function updateBorrowing(event) {
     addButton.addEventListener("click", addAmount);
 
     function addAmount() {
-      const newAmount = updateInput.value;
+      const newAmount = updateInput.value;;
 
       if (!isNaN(newAmount) && newAmount !== "") {
-        const record = borrowRecords.find((record) => record.id === id);
-        record.amount = Number(record.amount) + Number(newAmount);
+        borrowRecords.map((record) => {
+          if (record.id === id) {
+            record.amount = Number(record.amount) + Number(newAmount);
+          }
+          else
+            return record;
+        });
 
         updateInput.disabled = true; // Disable the input box after adding the amount
         addButton.disabled = true; // Disable the "Add" button after adding the amount
