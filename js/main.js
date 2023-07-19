@@ -27,7 +27,7 @@ function addBorrowing(event) {
   } else {
     const id = new Date().getTime(); //Generate random number
     // Add record to the array
-    borrowRecords.push({ customerName, amount, id});
+    borrowRecords.push({ customerName, amount, id });
 
     // Update borrowing list display status or show function
     updateBorrowingList();
@@ -105,9 +105,9 @@ function updateBorrowing(event) {
       const newAmount = updateInput.value;
 
       if (!isNaN(newAmount) && newAmount !== "") {
-        const index = borrowRecords.findIndex((record) => record.id === id);
-        borrowRecords[index].amount =
-          Number(borrowRecords[index].amount) + Number(newAmount);
+        const record = borrowRecords.find((record) => record.id === id);
+        record.amount = Number(record.amount) + Number(newAmount);
+
         updateInput.disabled = true; // Disable the input box after adding the amount
         addButton.disabled = true; // Disable the "Add" button after adding the amount
         updateBorrowingList();
@@ -115,7 +115,7 @@ function updateBorrowing(event) {
         // when you update, then again update & Save borrowRecords array to local storage
         localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
       }
-       else {
+      else {
         alert("Enter a valid amount");
       }
     }
@@ -130,11 +130,11 @@ function removeData(event) {
   const listItem = event.target.parentNode;
   const id = Number(listItem.getAttribute("data-id")); // Retrieve data-id from the li-tag
   const index = borrowRecords.findIndex((record) => record.id === id);
-    borrowRecords.splice(index, 1);
-    updateBorrowingList();
+  borrowRecords.splice(index, 1);
+  updateBorrowingList();
 
-    // Save borrowRecords array to local storage
-    localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
+  // Save borrowRecords array to local storage
+  localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
 }
 
 // Delete all records (also from Local Storage)
