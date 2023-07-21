@@ -21,20 +21,26 @@
     </h1>
 
     <h2 class="mx-5">Add New Borrower details</h2>
-    <form class="mx-5" id="borrowForm">
-      <label class="fs-5 mt-3">Name:</label>
-      <input class="p-2" type="text" id="name" placeholder="Nick Name.." />
+    <div class="d-flex">
+      <form class="mx-5" id="borrowForm" style="width: 20%">
+        <label class="fs-5 mt-3">Name:</label>
+        <input class="p-2" type="text" id="name" placeholder="Nick Name.." />
+        <label class="fs-5 mt-3">Amount:</label>
+        <input class="p-2" type="number" id="amount" placeholder="Money.." />
 
-      <label class="fs-5 mt-3">Amount:</label>
-      <input class="p-2" type="number" id="amount" placeholder="Money.." />
-
-      <button class="p-2 bg-warning position-relative" id="save-button" type="submit">
-        Save
-      </button>
-    </form>
-    
-      <button class="add p-2 mx-5 px-3 position-absolute" id="add-button" onclick="addFunction()">Add</button>
-   
+        <button class="p-2 bg-warning" id="save-button" type="submit">
+          Save
+        </button>
+      </form>
+      <div class="align-self-end" id="edit-button">
+        <button class="add p-2 px-3" style="margin-left: -7.1rem" onclick="addFunction(1)">
+          Add
+        </button>
+        <button class="add p-2 px-3 mx-2" onclick="addFunction(0)">
+          Sub
+        </button>
+      </div>
+    </div>
 
     <h2 class="text-center text-primary fw-bold mt-3">
       Borrowing List <i class="fa-solid fa-book-open-reader fa-bounce"></i>

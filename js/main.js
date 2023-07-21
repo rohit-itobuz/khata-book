@@ -4,7 +4,7 @@ const amountInput = document.getElementById("amount");
 const borrowForm = document.getElementById("borrowForm");
 const borrowList = document.getElementById("borrowList");
 const saveButton = document.getElementById("save-button");
-const addButton = document.getElementById("add-button");
+const addButton = document.getElementById("edit-button");
 
 // For first entry - empty array or retrieve data from local storage
 const borrowRecords = JSON.parse(localStorage.getItem("borrowRecords")) || [];
@@ -45,13 +45,14 @@ function addBorrowing(event) {
 
 // Function to update borrowing list display
 function updateBorrowingList() {
-  saveButton.classList.remove("hidden");
-  addButton.classList.add("hidden");
+  let totalAmount = 0;
+  borrowList.innerHTML = "";
   nameInput.value = "";
   amountInput.value = "";
+  nameInput.removeAttribute("readonly", true);
 
-  borrowList.innerHTML = "";
-  let totalAmount = 0;
+  saveButton.classList.remove("hidden");
+  addButton.classList.add("hidden");
 
   borrowRecords.forEach((record) => {
     const listItem = document.createElement("li");
@@ -96,28 +97,33 @@ function updateBorrowing(event) {
   //Show name and amount when u click on update
   const index = borrowRecords.findIndex((record) => record.id === id);
   nameInput.value = borrowRecords[index].customerName;
+  nameInput.setAttribute("readonly", true);
   amountInput.value = borrowRecords[index].amount;
   flag = id;
 
   saveButton.classList.add("hidden");
   addButton.classList.remove("hidden");
+
 }
 
 
-function addFunction() {
+function addFunction(e) {
   const newAmount = amountInput.value;
 
-  if (!isNaN(newAmount) && newAmount !== "") {
+  if (!isNaN(newAmount) && newAmount !== "" && newAmount > 0) {
     borrowRecords.map((record) => {
-      if (record.id === flag) {
+      if (record.id === flag && e) {
         record.amount = Number(record.amount) + Number(newAmount);
+      }
+      else if (record.id === flag) {
+        record.amount = Number(record.amount) - Number(newAmount);
       }
       else
         return record;
     });
 
     updateBorrowingList();
-    
+
 
     // when you update, then again update & Save borrowRecords array to local storage
     localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
