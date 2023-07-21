@@ -3,10 +3,12 @@ const nameInput = document.getElementById("name");
 const amountInput = document.getElementById("amount");
 const borrowForm = document.getElementById("borrowForm");
 const borrowList = document.getElementById("borrowList");
+const saveButton = document.getElementById("save-button");
+const addButton = document.getElementById("add-button");
 
 // For first entry - empty array or retrieve data from local storage
 const borrowRecords = JSON.parse(localStorage.getItem("borrowRecords")) || [];
-
+let flag = 0;
 
 // Function to add a borrowing record
 function addBorrowing(event) {
@@ -43,6 +45,11 @@ function addBorrowing(event) {
 
 // Function to update borrowing list display
 function updateBorrowingList() {
+  saveButton.classList.remove("hidden");
+  addButton.classList.add("hidden");
+  nameInput.value = "";
+  amountInput.value = "";
+
   borrowList.innerHTML = "";
   let totalAmount = 0;
 
@@ -86,48 +93,37 @@ function updateBorrowing(event) {
   const listItem = event.target.parentNode;
   const id = Number(listItem.getAttribute("data-id")); // Retrieve data-id from the li-tag
 
-  if (id !== null) {
-    const listItem = event.target.parentNode;
-    const updateInput = document.createElement("input");
-    const addButton = document.createElement("button");
+  //Show name and amount when u click on update
+  const index = borrowRecords.findIndex((record) => record.id === id);
+  nameInput.value = borrowRecords[index].customerName;
+  amountInput.value = borrowRecords[index].amount;
+  flag = id;
 
-    updateInput.type = "number";
-    updateInput.setAttribute("data-id", id);
-    updateInput.placeholder = "Additional amount";
-    updateInput.style.marginLeft = "2rem";
-    updateInput.style.padding = "2px";
+  saveButton.classList.add("hidden");
+  addButton.classList.remove("hidden");
+}
 
-    addButton.innerText = "Add";
-    addButton.style.padding = "2px";
-    addButton.addEventListener("click", addAmount);
 
-    function addAmount() {
-      const newAmount = updateInput.value;;
+function addFunction() {
+  const newAmount = amountInput.value;
 
-      if (!isNaN(newAmount) && newAmount !== "") {
-        borrowRecords.map((record) => {
-          if (record.id === id) {
-            record.amount = Number(record.amount) + Number(newAmount);
-          }
-          else
-            return record;
-        });
-
-        updateInput.disabled = true; // Disable the input box after adding the amount
-        addButton.disabled = true; // Disable the "Add" button after adding the amount
-        updateBorrowingList();
-
-        // when you update, then again update & Save borrowRecords array to local storage
-        localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
+  if (!isNaN(newAmount) && newAmount !== "") {
+    borrowRecords.map((record) => {
+      if (record.id === flag) {
+        record.amount = Number(record.amount) + Number(newAmount);
       }
-      else {
-        alert("Enter a valid amount");
-      }
-    }
-    listItem.insertBefore(updateInput, event.target.nextSibling);
-    listItem.insertBefore(addButton, updateInput.nextSibling);
+      else
+        return record;
+    });
 
-    event.target.style.display = "none"; // Hide the update button
+    updateBorrowingList();
+    
+
+    // when you update, then again update & Save borrowRecords array to local storage
+    localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
+  }
+  else {
+    alert("Enter a valid amount");
   }
 }
 
@@ -148,14 +144,6 @@ function deleteAll() {
   updateBorrowingList();
   localStorage.clear();
 }
-
-// Press ENTER to add Data
-borrowForm.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("save-button").click();
-  }
-});
 
 // Event listener for form submission
 borrowForm.addEventListener("submit", addBorrowing);

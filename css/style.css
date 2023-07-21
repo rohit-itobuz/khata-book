@@ -48,3 +48,12 @@ form label {
   white-space: nowrap;
   overflow-x: scroll;
 }
+
+.hidden {
+  display: none;
+}
+
+.add {
+  top: 31%;
+  left: 15.2%;
+}
