@@ -52,3 +52,9 @@ form label {
 .hidden {
   display: none;
 }
+
+@media (min-width: 1400px) {
+  .add {
+    margin-left: -9.2rem;
+  }
+}

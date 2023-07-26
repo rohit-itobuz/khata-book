@@ -1,6 +1,7 @@
 // Get values from input fields
 const nameInput = document.getElementById("name");
 const amountInput = document.getElementById("amount");
+const dateInput = document.getElementById("date");
 const borrowForm = document.getElementById("borrowForm");
 const borrowList = document.getElementById("borrowList");
 const saveButton = document.getElementById("save-button");
@@ -16,6 +17,7 @@ function addBorrowing(event) {
 
   const customerName = nameInput.value.trim();
   const amount = amountInput.value.trim();
+  const date = dateInput.value.trim();
 
   // Check if name already exists
   const existingRecord = borrowRecords.find(
@@ -24,12 +26,12 @@ function addBorrowing(event) {
   if (existingRecord) {
     alert("Name already exists...");
     return;
-  } else if (!customerName || !amount || amount <= 0) {
+  } else if (!customerName || !amount || amount <= 0 || !date) {
     alert("Please enter a proper name and a proper amount.");
   } else {
     const id = new Date().getTime(); //Generate random number
     // Add record to the array
-    borrowRecords.push({ customerName, amount, id });
+    borrowRecords.push({ customerName, amount, id, date });
 
     // Update borrowing list display status or show function
     updateBorrowingList();
@@ -41,6 +43,7 @@ function addBorrowing(event) {
   // Clear input fields when you click on add button
   nameInput.value = "";
   amountInput.value = "";
+  dateInput.value = "";
 }
 
 // Function to update borrowing list display
@@ -58,11 +61,13 @@ function updateBorrowingList() {
     const listItem = document.createElement("li");
     const nameSpan = document.createElement("span");
     const amountSpan = document.createElement("span");
+    const dateSpan = document.createElement("span");
     const removeButton = document.createElement("button");
     const updateButton = document.createElement("button");
 
     nameSpan.innerText = "🧍" + "Name:" + " " + record.customerName + " ";
     amountSpan.innerText = " " + "💵💰" + " " + "Amount:" + " " + "₹" + record.amount;
+    dateSpan.innerText = " " + "📅" + " " + "Date:" + " " + record.date;
 
     listItem.setAttribute("data-id", record.id);
 
@@ -80,6 +85,7 @@ function updateBorrowingList() {
 
     listItem.appendChild(nameSpan);
     listItem.appendChild(amountSpan);
+    listItem.appendChild(dateSpan);
     listItem.appendChild(removeButton);
     listItem.appendChild(updateButton);
     borrowList.appendChild(listItem);
@@ -99,6 +105,7 @@ function updateBorrowing(event) {
   nameInput.value = borrowRecords[index].customerName;
   nameInput.setAttribute("readonly", true);
   amountInput.value = borrowRecords[index].amount;
+  dateInput.value = borrowRecords[index].date;
   flag = id;
 
   saveButton.classList.add("hidden");
@@ -109,22 +116,23 @@ function updateBorrowing(event) {
 
 function addFunction(e) {
   const newAmount = amountInput.value;
+  const newDate = dateInput.value;
 
   if (!isNaN(newAmount) && newAmount !== "" && newAmount > 0) {
     borrowRecords.map((record) => {
       if (record.id === flag && e) {
         record.amount = Number(record.amount) + Number(newAmount);
+        record.date = newDate;
       }
       else if (record.id === flag) {
         record.amount = Number(record.amount) - Number(newAmount);
+        record.date = newDate;
       }
       else
         return record;
     });
 
     updateBorrowingList();
-
-
     // when you update, then again update & Save borrowRecords array to local storage
     localStorage.setItem("borrowRecords", JSON.stringify(borrowRecords));
   }
